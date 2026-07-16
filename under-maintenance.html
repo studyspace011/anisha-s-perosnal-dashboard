@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaam Chalu Hai Bhai!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+            border-top: 8px solid #ff9800; /* Warning Yellow-Orange Color */
+        }
+
+        /* --- Funny Animated Emoji Container --- */
+        .emoji-container {
+            font-size: 70px;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Hathoda (Hammer) Animation */
+        .hammer {
+            display: inline-block;
+            animation: thokna 0.6s ease-in-out infinite alternate;
+            transform-origin: bottom right;
+        }
+
+        /* --- Text Styling --- */
+        h1 {
+            color: #e65100;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        /* Highlighted Alert Badge */
+        .badge {
+            background-color: #fff3e0;
+            color: #e65100;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            border: 1px dashed #ffb74d;
+        }
+
+        /* --- Smooth Animations Keyframes --- */
+        @keyframes thokna {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(-35deg);
+            }
+        }
+
+        /* --- Mobile Responsive Rules --- */
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Animated Hammer and Pliers -->
+        <div class="emoji-container">
+            <span class="hammer">🔨</span>🔧
+        </div>
+
+        <!-- Ekdam clear message jo sabko samajh aaye -->
+        <h1>Kaam Baki Hai, Jaldi Ban Rha Hai!</h1>
+        
+        <p class="message">
+            Hnn jii, thoda sa wait kijiye! Baki ki chije piche back-end me ban rahi hain. Bahut jald sab set krke live kr denge. 🚀
+        </p>
+
+        <!-- Chhota warning/wait badge -->
+        <div class="badge">
+            ⚠️ Kripya Shanti Banaye Rakhein!
+        </div>
+    </div>
+
+</body>
+</html>
