@@ -3,17 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ani - Mobile Workspace</title>
+    <title>Ani's Study Space</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body>
 
+    <!-- GREETING POPUP MODAL -->
+    <div id="greeting-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-icon">
+                <svg class="icon-svg-lg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8a8 8 0 0 1-8 8z"/></svg>
+            </div>
+            <h2 id="modal-greeting-text">Good Day, Ani... Jii</h2>
+            <p>Welcome back to your study workspace. Ready to focus today?</p>
+            <button onclick="closeGreetingModal()" class="btn-action btn-modal">Let's Study!</button>
+        </div>
+    </div>
+
     <!-- MOBILE HEADER TOP BAR -->
     <header class="mobile-top-bar">
-        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-        <div class="mobile-brand">Ani's Dashboard 🪐</div>
-        <button class="theme-btn" onclick="toggleTheme()">🌓</button>
+        <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        </button>
+        <div class="mobile-brand">Ani's Study Space</div>
+        <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+            <svg class="icon-svg theme-icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26a5.403 5.403 0 0 1-5.4-5.4c0-1.81.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3z"/></svg>
+        </button>
     </header>
 
     <!-- SIDEBAR OVERLAY FOR MOBILE -->
@@ -22,21 +38,53 @@
     <!-- SIDEBAR -->
     <aside id="sidebar" class="collapsed">
         <div class="brand">
-            <span>Menu Options</span>
-            <button onclick="toggleSidebar()" class="close-sidebar-btn">×</button>
+            <span>Navigation</span>
+            <div class="sidebar-right-controls">
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+                    <svg class="icon-svg theme-icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26a5.403 5.403 0 0 1-5.4-5.4c0-1.81.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3z"/></svg>
+                </button>
+                <button onclick="toggleSidebar()" class="close-sidebar-btn" aria-label="Close Sidebar">&times;</button>
+            </div>
         </div>
         <ul class="nav-links">
-            <li><a onclick="navigateTo('dashboard')" id="nav-dashboard" class="active">🏠 Dashboard</a></li>
-            <li><a onclick="navigateTo('syllabus')" id="nav-syllabus">📋 Syllabus Vault</a></li>
-            <li><a onclick="navigateTo('notes')" id="nav-notes">📚 PDF Notes</a></li>
-            <li><a onclick="navigateTo('slides')" id="nav-slides">🖼️ Revision Slides</a></li>
-            <li><hr style="border-color: rgba(255,255,255,0.1); margin: 0.5rem 0;"></li>
-            <li><a href="https://studyspace011.github.io/Ani-audio-studio/" target="_blank" style="color: #38bdf8;">🎧 Audio Room ↗</a></li>
-            <li><a href="https://studyspace011.github.io/ani-personal-dashboard/under-maintenance.html" target="_blank" style="color: #38bdf8;">📝 Test Series ↗</a></li>
+            <li>
+                <a onclick="navigateTo('dashboard')" id="nav-dashboard" class="active">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/></svg>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a onclick="navigateTo('syllabus')" id="nav-syllabus">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    Syllabus Vault
+                </a>
+            </li>
+            <li>
+                <a onclick="navigateTo('notes')" id="nav-notes">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+                    PDF Notes
+                </a>
+            </li>
+            <li>
+                <a onclick="navigateTo('slides')" id="nav-slides">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
+                    Revision Slides
+                </a>
+            </li>
+            <li><hr class="nav-divider"></li>
+            <li>
+                <a href="https://studyspace011.github.io/Ani-audio-studio/" target="_blank" class="external-link">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55c-2.21 0-4 1.79-4 4s1.79 4 4 4s4-1.79 4-4V7h4V3h-6z"/></svg>
+                    Audio Room
+                </a>
+            </li>
+            <li>
+                <a href="https://studyspace011.github.io/ani-personal-dashboard/under-maintenance.html" target="_blank" class="external-link">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    Test Series
+                </a>
+            </li>
         </ul>
-        <div class="sidebar-footer">
-            <button onclick="downloadMasterZip()" class="btn-action export-btn">⚡ Export Workspace (.zip)</button>
-        </div>
     </aside>
 
     <!-- MAIN VIEWPORT -->
@@ -44,8 +92,10 @@
 
         <!-- VIEW 1: DASHBOARD -->
         <div id="view-dashboard" class="content-view">
-            <h1>Ani Personal Dashboard ☕</h1>
-            <p class="subtitle">Real-time study metrics & checklist.</p>
+            <div class="header-box">
+                <h1>Ani's Study Space</h1>
+                <p class="subtitle">Real-time study metrics & syllabus progress.</p>
+            </div>
             
             <div class="grid-stats">
                 <div class="stat-card">
@@ -60,30 +110,56 @@
             </div>
 
             <div class="card">
-                <h2>Interactive Checklist 🎯</h2>
-                <p class="card-desc">Tap topics to instantly update your statistics.</p>
+                <div class="card-header">
+                    <h2>Interactive Checklist</h2>
+                    <p class="card-desc">Tap topics to sync completion metrics.</p>
+                </div>
                 <div id="dashboard-tracker-list"></div>
             </div>
         </div>
 
         <!-- VIEW 2: SYLLABUS -->
         <div id="view-syllabus" class="content-view hidden">
-            <h1>Syllabus Vault 📋</h1>
-            <p class="subtitle">Quick access to official syllabus structure.</p>
+            <div class="section-top-bar">
+                <div>
+                    <h1>Syllabus Vault</h1>
+                    <p class="subtitle">Quick access to official course outlines.</p>
+                </div>
+                <button onclick="downloadSectionZip('syllabus')" class="btn-action bulk-dl-btn">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7l7-7zM5 18v2h14v-2H5z"/></svg>
+                    Download All Syllabus (.zip)
+                </button>
+            </div>
             <div class="grid-cards" id="syllabus-cards-container"></div>
         </div>
 
         <!-- VIEW 3: NOTES -->
         <div id="view-notes" class="content-view hidden">
-            <h1>PDF Notes Center 📚</h1>
-            <p class="subtitle">Comprehensive study guides for easy reading.</p>
+            <div class="section-top-bar">
+                <div>
+                    <h1>PDF Notes Center</h1>
+                    <p class="subtitle">Comprehensive study guides and subject notes.</p>
+                </div>
+                <button onclick="downloadSectionZip('notes')" class="btn-action bulk-dl-btn accent-green">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7l7-7zM5 18v2h14v-2H5z"/></svg>
+                    Download All Notes (.zip)
+                </button>
+            </div>
             <div class="grid-cards" id="notes-cards-container"></div>
         </div>
 
         <!-- VIEW 4: REVISION SLIDES -->
         <div id="view-slides" class="content-view hidden">
-            <h1 id="slides-title">Revision Slide Decks 🖼️</h1>
-            <p id="slides-subtitle" class="subtitle">Select a subject below.</p>
+            <div class="section-top-bar">
+                <div>
+                    <h1 id="slides-title">Revision Slide Decks</h1>
+                    <p id="slides-subtitle" class="subtitle">Select a subject folder below.</p>
+                </div>
+                <button id="bulk-slides-btn" onclick="downloadSectionZip('slides')" class="btn-action bulk-dl-btn accent-purple">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7l7-7zM5 18v2h14v-2H5z"/></svg>
+                    Download All Slides (.zip)
+                </button>
+            </div>
             <div id="slides-container"></div>
         </div>
 
