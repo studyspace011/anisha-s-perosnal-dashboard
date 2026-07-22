@@ -1,5 +1,4 @@
-// --- 🗂️ MASTER ACADEMIC DATABASE ---
-// Keys and values are explicitly synchronized with your exact GitHub file structures
+// --- MASTER ACADEMIC DATABASE ---
 const academicDatabase = {
     "MJC-5-Eng": {
         name: "American Literature",
@@ -90,8 +89,52 @@ const academicDatabase = {
     }
 };
 
-// --- STORAGE SYSTEM ---
 let syllabusTracker = JSON.parse(localStorage.getItem('syllabusTracker')) || {};
+
+// --- DYNAMIC GREETING POPUP CONTROLLER ---
+function triggerGreetingModal() {
+    const greetingModal = document.getElementById('greeting-modal');
+    const greetingTextElement = document.getElementById('modal-greeting-text');
+    if (!greetingModal || !greetingTextElement) return;
+
+    const currentHour = new Date().getHours();
+    let greetingText = "";
+
+    if (currentHour >= 4 && currentHour < 12) {
+        greetingText = "Good Morning, Ani Jii 🌅";
+    } else if (currentHour >= 12 && currentHour < 17) {
+        greetingText = "Good Afternoon, Ani Jii ☀️";
+    } else if (currentHour >= 17 && currentHour < 21) {
+        greetingText = "Good Evening, Ani Jii 🌆";
+    } else {
+        greetingText = "Good Night, Ani Jii 🌙";
+    }
+
+    greetingTextElement.innerText = greetingText;
+    greetingModal.classList.remove('hidden');
+}
+
+function closeGreetingModal() {
+    const greetingModal = document.getElementById('greeting-modal');
+    if (greetingModal) greetingModal.classList.add('hidden');
+}
+
+// --- DARK / LIGHT THEME CONTROLLER ---
+const sunSVG = `<path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5s5-2.24 5-5s-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>`;
+const moonSVG = `<path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26a5.403 5.403 0 0 1-5.4-5.4c0-1.81.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3z"/>`;
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    document.querySelectorAll('.theme-icon-svg').forEach(icon => {
+        icon.innerHTML = theme === 'dark' ? sunSVG : moonSVG;
+    });
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(currentTheme);
+}
 
 // --- MOBILE SIDEBAR DRAWER CONTROLLER ---
 function toggleSidebar() {
@@ -107,15 +150,7 @@ function toggleSidebar() {
     }
 }
 
-// --- AUTOMATED DARK MODE MANAGEMENT ---
-function toggleTheme() {
-    const active = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', active);
-    localStorage.setItem('theme', active);
-}
-if(localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-
-// --- MOBILE VIEW ROUTER CONTROL ---
+// --- ROUTER ENGINE ---
 function navigateTo(target) {
     document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
     const targetEl = document.getElementById(`nav-${target}`);
@@ -137,7 +172,7 @@ function navigateTo(target) {
     else if (target === 'slides') renderSlidesSubjectLanding();
 }
 
-// --- 1. CORE DASHBOARD ENGINE ---
+// --- 1. DASHBOARD CONTROLLER ---
 function renderDashboard() {
     const trackerContainer = document.getElementById('dashboard-tracker-list');
     trackerContainer.innerHTML = '';
@@ -148,7 +183,7 @@ function renderDashboard() {
     Object.keys(academicDatabase).forEach(subCode => {
         const subjectBox = document.createElement('div');
         subjectBox.style.marginBottom = '1.25rem';
-        subjectBox.innerHTML = `<h3 style="font-size:1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.3rem; margin-bottom: 0.5rem; color:var(--accent);">${subCode}</h3>`;
+        subjectBox.innerHTML = `<h3 style="font-size:0.95rem; border-bottom: 2px solid var(--border); padding-bottom: 0.3rem; margin-bottom: 0.5rem; color:var(--accent); font-weight:700;">${subCode}</h3>`;
 
         academicDatabase[subCode].units.forEach(unit => {
             unit.topics.forEach(topic => {
@@ -162,7 +197,7 @@ function renderDashboard() {
                 row.onclick = () => toggleTrackItem(key);
                 row.innerHTML = `
                     <span><strong>${topic.code}</strong> ${topic.name}</span>
-                    <input type="checkbox" ${isChecked ? 'checked' : ''} style="width:20px; height:20px; pointer-events:none;">
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} style="width:18px; height:18px; pointer-events:none;">
                 `;
                 subjectBox.appendChild(row);
             });
@@ -182,19 +217,19 @@ function toggleTrackItem(key) {
     renderDashboard();
 }
 
-// --- 2. VAULT SYLLABUS CONTROLLER (Strict Underscore Rule matching your GitHub image) ---
+// SVG ICONS
+const eyeIcon = `<svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z"/></svg>`;
+const downloadIcon = `<svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7l7-7zM5 18v2h14v-2H5z"/></svg>`;
+
+// --- 2. SYLLABUS CONTROLLER ---
 function renderSyllabusPage() {
     const container = document.getElementById('syllabus-cards-container');
     container.innerHTML = '';
 
     Object.keys(academicDatabase).forEach(code => {
         const repoPrefix = academicDatabase[code].repoName;
-        
-        // Exact spelling match logic according to your repository pictures
         let fileName = `${repoPrefix}_Syllabus.pdf`;
-        if (code === "MJC-7-Eng") {
-            fileName = "MJC-7-Eng_Syllabys.pdf"; // Matches the typo "Syllabys.pdf" from your exact screen capture
-        }
+        if (code === "MJC-7-Eng") fileName = "MJC-7-Eng_Syllabys.pdf";
 
         const card = document.createElement('div');
         card.className = 'subject-card';
@@ -202,42 +237,42 @@ function renderSyllabusPage() {
             <h3>${code}</h3>
             <p style="color: var(--text-muted); font-size:0.85rem; margin: 0.2rem 0 1rem;">${academicDatabase[code].name}</p>
             <div class="btn-container">
-                <a href="recourses/syllabus/${fileName}" target="_blank" class="btn-action">👁️ View</a>
-                <a href="recourses/syllabus/${fileName}" download class="btn-action btn-secondary">⬇️ Download</a>
+                <a href="recourses/syllabus/${fileName}" target="_blank" class="btn-action">${eyeIcon} View</a>
+                <a href="recourses/syllabus/${fileName}" download class="btn-action btn-secondary">${downloadIcon} Download</a>
             </div>
         `;
         container.appendChild(card);
     });
 }
 
-// --- 3. ACADEMIC NOTES CONTROLLER (Strict Underscore Rule matching your GitHub image) ---
+// --- 3. NOTES CONTROLLER ---
 function renderNotesPage() {
     const container = document.getElementById('notes-cards-container');
     container.innerHTML = '';
 
     Object.keys(academicDatabase).forEach(code => {
         const repoPrefix = academicDatabase[code].repoName;
-        const fileName = `${repoPrefix}_Notes.pdf`; // Generates e.g. recourses/notes/MJC-5_Eng_Notes.pdf
+        const fileName = `${repoPrefix}_Notes.pdf`;
 
         const card = document.createElement('div');
         card.className = 'subject-card';
-        card.style.borderColor = "#10b981";
+        card.style.borderLeftColor = "#059669";
         card.innerHTML = `
             <h3>${code}</h3>
             <p style="color: var(--text-muted); font-size:0.85rem; margin: 0.2rem 0 1rem;">${academicDatabase[code].name}</p>
             <div class="btn-container">
-                <a href="recourses/notes/${fileName}" target="_blank" class="btn-action" style="background:#10b981">📖 Open Notes</a>
-                <a href="recourses/notes/${fileName}" download class="btn-action btn-secondary">⬇/PDF</a>
+                <a href="recourses/notes/${fileName}" target="_blank" class="btn-action" style="background:#059669">${eyeIcon} Read Notes</a>
+                <a href="recourses/notes/${fileName}" download class="btn-action btn-secondary">${downloadIcon} PDF</a>
             </div>
         `;
         container.appendChild(card);
     });
 }
 
-// --- 4. REVISION SLIDES DRAWER (With Dummy Fallback to ensure seamless execution) ---
+// --- 4. REVISION SLIDES CONTROLLER ---
 function renderSlidesSubjectLanding() {
-    document.getElementById('slides-title').innerText = "Revision Slide Decks 🖼️";
-    document.getElementById('slides-subtitle').innerText = "Select subject folder to open slides.";
+    document.getElementById('slides-title').innerText = "Revision Slide Decks";
+    document.getElementById('slides-subtitle').innerText = "Select a subject folder below.";
 
     const container = document.getElementById('slides-container');
     container.innerHTML = `<div class="grid-cards"></div>`;
@@ -247,10 +282,14 @@ function renderSlidesSubjectLanding() {
         const card = document.createElement('div');
         card.className = 'subject-card';
         card.style.cursor = 'pointer';
+        card.style.borderLeftColor = "#9333ea";
         card.innerHTML = `
             <h3>${code}</h3>
             <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.3rem;">${academicDatabase[code].name}</p>
-            <div style="font-size:0.8rem; margin-top:0.8rem; color:var(--accent); font-weight:600;">Open Folder →</div>
+            <div style="font-size:0.8rem; margin-top:0.8rem; color:#9333ea; font-weight:600; display:flex; align-items:center; gap:4px;">
+                Open Folder 
+                <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24"><path fill="currentColor" d="M5 13h11.86l-5.43 5.43L13 19.84L20.84 12L13 4.16l-1.43 1.41L16.86 11H5v2z"/></svg>
+            </div>
         `;
         card.onclick = () => renderSlideTopicsList(code);
         grid.appendChild(card);
@@ -262,28 +301,31 @@ function renderSlideTopicsList(subCode) {
     document.getElementById('slides-title').innerText = `${subCode} Slides`;
     
     const container = document.getElementById('slides-container');
-    container.innerHTML = `<button class="btn-action btn-secondary" onclick="renderSlidesSubjectLanding()" style="margin-bottom: 1.25rem; flex:none; width:auto; padding:0.6rem 1rem;">← Back</button>`;
+    const backBtn = `
+        <button class="btn-action btn-secondary" onclick="renderSlidesSubjectLanding()" style="margin-bottom: 1rem; width:auto; padding:0.5rem 1rem;">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8l8 8l1.41-1.41L7.83 13H20v-2z"/></svg>
+            Back to Folders
+        </button>
+    `;
+    
+    container.innerHTML = backBtn;
 
     academicDatabase[subCode].units.forEach(unit => {
         const box = document.createElement('div');
         box.className = 'card';
-        box.innerHTML = `<h3 style="margin-bottom:0.75rem; border-bottom:1px solid var(--border); padding-bottom:0.4rem; font-size:1.05rem;">${unit.title}</h3>`;
+        box.innerHTML = `<h3 style="margin-bottom:0.75rem; border-bottom:1px solid var(--border); padding-bottom:0.4rem; font-size:1rem;">${unit.title}</h3>`;
 
         unit.topics.forEach(topic => {
-            // Target production path rule requested: recourses/slides/[Folder_Name]/[1.1, 1.2, etc].pdf
             const realPath = `recourses/slides/${targetFolder}/${topic.code}.pdf`;
-            
-            // Safe fallback rule for seamless preview rendering without breaking the dashboard UI
-            const dummyPreviewPath = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
 
             const row = document.createElement('div');
             row.className = 'tracker-item';
             row.style.padding = '0.6rem 0';
             row.innerHTML = `
                 <span style="font-size:0.85rem;"><strong>File: ${topic.code}.pdf</strong><br><span style="color:var(--text-muted);">${topic.name}</span></span>
-                <div class="btn-container" style="flex:none; width:150px; margin-top:0;">
-                    <a href="${realPath}" target="_blank" class="btn-action" style="padding:0.4rem; font-size:0.75rem;">🖼️ Live</a>
-                    <a href="${dummyPreviewPath}" target="_blank" class="btn-action btn-secondary" style="padding:0.4rem; font-size:0.75rem;">👀 Dummy</a>
+                <div class="btn-container" style="flex:none; width:auto; margin-top:0;">
+                    <a href="${realPath}" target="_blank" class="btn-action" style="padding:0.4rem 0.6rem; font-size:0.75rem; background:#9333ea">${eyeIcon} View</a>
+                    <a href="${realPath}" download class="btn-action btn-secondary" style="padding:0.4rem 0.6rem; font-size:0.75rem;">${downloadIcon} Download</a>
                 </div>
             `;
             box.appendChild(row);
@@ -292,18 +334,39 @@ function renderSlideTopicsList(subCode) {
     });
 }
 
-// --- 5. WORKSPACE ZIP PACK EXPORTER ---
-function downloadMasterZip() {
-    alert("Compiling structural system package layout templates...");
+// --- 5. BULK SECTION ZIP DOWNLOAD ENGINE ---
+function downloadSectionZip(type) {
+    alert(`Preparing ${type.toUpperCase()} package zip download...`);
     const zip = new JSZip();
-    Object.keys(academicDatabase).forEach(code => {
-        const folder = zip.folder(code);
-        folder.file("Structure_Details.txt", `Syllabus tracking structure for: ${code}`);
-    });
-    zip.generateAsync({type:"blob"}).then(function(content) {
+    const folder = zip.folder(`${type}_files`);
+
+    if (type === 'syllabus') {
+        Object.keys(academicDatabase).forEach(code => {
+            const repoPrefix = academicDatabase[code].repoName;
+            let fileName = `${repoPrefix}_Syllabus.pdf`;
+            if (code === "MJC-7-Eng") fileName = "MJC-7-Eng_Syllabys.pdf";
+            folder.file(fileName, `Syllabus Content for ${code}`);
+        });
+    } else if (type === 'notes') {
+        Object.keys(academicDatabase).forEach(code => {
+            const repoPrefix = academicDatabase[code].repoName;
+            folder.file(`${repoPrefix}_Notes.pdf`, `Notes Content for ${code}`);
+        });
+    } else if (type === 'slides') {
+        Object.keys(academicDatabase).forEach(code => {
+            const subFolder = folder.folder(code);
+            academicDatabase[code].units.forEach(unit => {
+                unit.topics.forEach(topic => {
+                    subFolder.file(`${topic.code}.pdf`, `Slide deck for ${topic.name}`);
+                });
+            });
+        });
+    }
+
+    zip.generateAsync({ type: "blob" }).then(function (content) {
         const link = document.createElement('a');
         link.href = URL.createObjectURL(content);
-        link.download = "ZenStudy_Workspace.zip";
+        link.download = `Ani_${type.toUpperCase()}_Package.zip`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -312,5 +375,8 @@ function downloadMasterZip() {
 
 // Global Initialization
 document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+    triggerGreetingModal();
     navigateTo('dashboard');
 });
