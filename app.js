@@ -1,9 +1,12 @@
+// --- MASTER CONFIGURATION ---
+const GITHUB_USER = "studyspace011";
+const GITHUB_REPO = "ani-personal-dashboard";
+
 // --- MASTER ACADEMIC DATABASE ---
 const academicDatabase = {
     "MJC-5-Eng": {
         name: "American Literature",
-        repoName: "MJC-5_Eng",
-        folder: "MJC-5-Eng",
+        tag: "mjc-5-english",
         units: [
             { title: "Unit 1: Drama", topics: [{ code: "1.1", name: "Tennessee Williams: The Glass Menagerie" }] },
             { title: "Unit 2: Fiction", topics: [{ code: "2.1", name: "Toni Morrison: Beloved" }] },
@@ -23,40 +26,37 @@ const academicDatabase = {
     },
     "MJC-6-Eng": {
         name: "Language and Linguistics",
-        repoName: "MJC-6_Eng",
-        folder: "MJC-6-Eng",
+        tag: "mjc-6-english",
         units: [
             { title: "Unit 1: Core Concepts", topics: [
-                { code: "1.1", name: "Introduction to Language & Linguistics" },
-                { code: "1.2", name: "Language Varieties (Dialect, Register)" },
-                { code: "1.3", name: "Linguistic Dichotomies (Langue & Parole)" }
+                { code: "1.1.1", name: "Introduction to Language & Linguistics" },
+                { code: "1.1.2", name: "Language Varieties (Dialect, Register)" },
+                { code: "1.1.3", name: "Linguistic Dichotomies (Langue & Parole)" }
             ]},
             { title: "Unit 2: Phonetics & Phonology", topics: [
-                { code: "2.1", name: "Organs of Speech Sound Classification" },
-                { code: "2.2", name: "Prosody & Syllable Structure (Word Stress)" }
+                { code: "2.1.1", name: "Organs of Speech Sound Classification" },
+                { code: "2.1.2", name: "Prosody & Syllable Structure (Word Stress)" }
             ]},
             { title: "Unit 3: Morphology", topics: [
-                { code: "3.1", name: "Morphs, Morphemes & Allomorphs Matrix" },
-                { code: "3.2", name: "Word Construction & Affixes Systems" }
+                { code: "3.1.1", name: "Morphs, Morphemes & Allomorphs Matrix" },
+                { code: "3.1.2", name: "Word Construction & Affixes Systems" }
             ]},
-            { title: "Unit 4: Oral Drills & Practices", topics: [{ code: "4.1", name: "Applied Phonetics & IPA Transcription Practice" }] }
+            { title: "Unit 4: Oral Drills & Practices", topics: [{ code: "4.1.1", name: "Applied Phonetics & IPA Transcription Practice" }] }
         ]
     },
     "MJC-7-Eng": {
         name: "British Poetry and Drama : 17th Century",
-        repoName: "MJC-7_Eng",
-        folder: "MJC-7-Eng",
+        tag: "mjc-7-english",
         units: [
-            { title: "Unit 1: Epic Poetry", topics: [{ code: "1.1", name: "John Milton: Paradise Lost (Book 1)" }] },
-            { title: "Unit 2: Metaphysical Poetry", topics: [{ code: "2.1", name: "John Donne: Poems Series" }] },
-            { title: "Unit 3: Jacobean Comedy", topics: [{ code: "3.1", name: "Ben Jonson: The Alchemist" }] },
-            { title: "Unit 4: Jacobean Tragedy", topics: [{ code: "4.1", name: "Thomas Middleton: Women Beware Women" }] }
+            { title: "Unit 1: Epic Poetry", topics: [{ code: "1.1.1", name: "John Milton: Paradise Lost (Book 1)" }] },
+            { title: "Unit 2: Metaphysical Poetry", topics: [{ code: "2.1.1", name: "John Donne: Poems Series" }] },
+            { title: "Unit 3: Jacobean Comedy", topics: [{ code: "3.1.1", name: "Ben Jonson: The Alchemist" }] },
+            { title: "Unit 4: Jacobean Tragedy", topics: [{ code: "4.1.1", name: "Thomas Middleton: Women Beware Women" }] }
         ]
     },
     "MIC-4-Urdu": {
         name: "Study of Urdu Ghazal",
-        repoName: "MIC-4_Urdu",
-        folder: "MIC-4-Urdu",
+        tag: "mic-4-urdu",
         units: [
             { title: "Unit 1: Tareef-o-Tareekh", topics: [
                 { code: "1.1", name: "Urdu Ghazal ki Tareef aur Haisiyat" },
@@ -72,18 +72,51 @@ const academicDatabase = {
             ]}
         ]
     },
+    "MIC-4-Hindi": {
+        name: "आधुनिक हिन्दी कविता : छायावाद के बाद",
+        tag: "mic-4-hindi",
+        units: [
+            { 
+                title: "Unit 1: प्रगतिवादी कविता", 
+                topics: [
+                    { code: "1.1.1", name: "केदारनाथ अग्रवाल: माँझी! न बजाओ वंशी" },
+                    { code: "1.1.2", name: "केदारनाथ अग्रवाल: वह जन मारे नहीं मरेगा" },
+                    { code: "1.2.1", name: "नागार्जुन: बादल को घिरते देखा है" },
+                    { code: "1.2.2", name: "नागार्जुन: शासन की बंदूक" },
+                    { code: "1.2.3", name: "नागार्जुन: अकाल और उसके बाद" }
+                ] 
+            },
+            { 
+                title: "Unit 2: राष्ट्रीय सांस्कृतिक काव्यधारा एवं प्रबन्ध काव्य", 
+                topics: [
+                    { code: "2.1.1", name: "रामधारी सिंह 'दिनकर': रश्मिरथी (तृतीय सर्ग)" },
+                    { code: "2.2.1", name: "माखनलाल चतुर्वेदी: झरना" },
+                    { code: "2.2.2", name: "माखनलाल चतुर्वेदी: कैदी और कोकिला" },
+                    { code: "2.2.3", name: "माखनलाल चतुर्वेदी: नाशा का त्यौहार (हिमकिरीटिनी)" }
+                ] 
+            },
+            { 
+                title: "Unit 3: प्रयोगवाद एवं नई कविता", 
+                topics: [
+                    { code: "3.1.1", name: "भवानीप्रसाद मिश्र: सतपुड़ा के जंगल" },
+                    { code: "3.1.2", name: "भवानीप्रसाद मिश्र: गीत-फ़रोश (दूसरा सप्तक)" },
+                    { code: "3.2.1", name: "रघुवीर सहाय: पढ़िए गीता" },
+                    { code: "3.2.2", name: "रघुवीर सहाय: रामदास" },
+                    { code: "3.2.3", name: "रघुवीर सहाय: हाँसो हाँसो जल्दी हाँसो, नेता क्षमा करें" }
+                ] 
+            }
+        ]
+    },
     "AEC-4": {
         name: "Social Service / Scout & Guide / Sports",
-        repoName: "AEC-4",
-        folder: "AEC-4",
+        tag: "aec-4",
         units: [
             { title: "Unit 1: NCC General", topics: [{ code: "1.1", name: "Introduction to NCC: Aims & Organization" }] },
             { title: "Unit 2: National Integration", topics: [{ code: "2.1", name: "Concept of Unity & Threats to National Security" }] },
             { title: "Unit 3: Personality Development", topics: [{ code: "3.1", name: "Personal Traits, Empathy & Creative Thinking" }] },
             { title: "Unit 4: Social Service", topics: [{ code: "4.1", name: "Basics of Social Service, NGOs & Youth Role" }] },
             { title: "Practical Component", topics: [
-                { code: "P.1", name: "Military Training (Drill, Map Reading, Weapon Training)" },
-                { code: "P.2", name: "Social Activity & Field Craft Exercise Packs" }
+                { code: "P.1", name: "Military Training (Drill, Map Reading)" }
             ]}
         ]
     }
@@ -91,32 +124,14 @@ const academicDatabase = {
 
 let syllabusTracker = JSON.parse(localStorage.getItem('syllabusTracker')) || {};
 
-// --- DYNAMIC GREETING POPUP CONTROLLER ---
-function triggerGreetingModal() {
-    const greetingModal = document.getElementById('greeting-modal');
-    const greetingTextElement = document.getElementById('modal-greeting-text');
-    if (!greetingModal || !greetingTextElement) return;
-
-    const currentHour = new Date().getHours();
-    let greetingText = "";
-
-    if (currentHour >= 4 && currentHour < 12) {
-        greetingText = "Good Morning, Ani Jii 🌅";
-    } else if (currentHour >= 12 && currentHour < 17) {
-        greetingText = "Good Afternoon, Ani Jii ☀️";
-    } else if (currentHour >= 17 && currentHour < 21) {
-        greetingText = "Good Evening, Ani Jii 🌆";
-    } else {
-        greetingText = "Good Night, Ani Jii 🌙";
-    }
-
-    greetingTextElement.innerText = greetingText;
-    greetingModal.classList.remove('hidden');
+// --- HELPER: GITHUB RELEASE URL CONVERTER FOR BROWSER VIEWING ---
+function getGithubPdfViewerUrl(tag, filename) {
+    const rawDownloadUrl = `https://github.com/${GITHUB_USER}/${GITHUB_REPO}/releases/download/${tag}/${filename}`;
+    return `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(rawDownloadUrl)}`;
 }
 
-function closeGreetingModal() {
-    const greetingModal = document.getElementById('greeting-modal');
-    if (greetingModal) greetingModal.classList.add('hidden');
+function getGithubPdfDownloadUrl(tag, filename) {
+    return `https://github.com/${GITHUB_USER}/${GITHUB_REPO}/releases/download/${tag}/${filename}`;
 }
 
 // --- DARK / LIGHT THEME CONTROLLER ---
@@ -136,7 +151,7 @@ function toggleTheme() {
     applyTheme(currentTheme);
 }
 
-// --- MOBILE SIDEBAR DRAWER CONTROLLER ---
+// --- MOBILE SIDEBAR CONTROLLER ---
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
@@ -227,9 +242,11 @@ function renderSyllabusPage() {
     container.innerHTML = '';
 
     Object.keys(academicDatabase).forEach(code => {
-        const repoPrefix = academicDatabase[code].repoName;
-        let fileName = `${repoPrefix}_Syllabus.pdf`;
-        if (code === "MJC-7-Eng") fileName = "MJC-7-Eng_Syllabys.pdf";
+        const tag = academicDatabase[code].tag;
+        const fileName = `${code}_Syllabus.pdf`;
+        
+        const viewUrl = getGithubPdfViewerUrl(tag, fileName);
+        const downloadUrl = getGithubPdfDownloadUrl(tag, fileName);
 
         const card = document.createElement('div');
         card.className = 'subject-card';
@@ -237,8 +254,8 @@ function renderSyllabusPage() {
             <h3>${code}</h3>
             <p style="color: var(--text-muted); font-size:0.85rem; margin: 0.2rem 0 1rem;">${academicDatabase[code].name}</p>
             <div class="btn-container">
-                <a href="recourses/syllabus/${fileName}" target="_blank" class="btn-action">${eyeIcon} View</a>
-                <a href="recourses/syllabus/${fileName}" download class="btn-action btn-secondary">${downloadIcon} Download</a>
+                <a href="${viewUrl}" target="_blank" class="btn-action">${eyeIcon} View</a>
+                <a href="${downloadUrl}" download class="btn-action btn-secondary">${downloadIcon} Download</a>
             </div>
         `;
         container.appendChild(card);
@@ -251,8 +268,11 @@ function renderNotesPage() {
     container.innerHTML = '';
 
     Object.keys(academicDatabase).forEach(code => {
-        const repoPrefix = academicDatabase[code].repoName;
-        const fileName = `${repoPrefix}_Notes.pdf`;
+        const tag = academicDatabase[code].tag;
+        const fileName = `${code}_Notes.pdf`;
+
+        const viewUrl = getGithubPdfViewerUrl(tag, fileName);
+        const downloadUrl = getGithubPdfDownloadUrl(tag, fileName);
 
         const card = document.createElement('div');
         card.className = 'subject-card';
@@ -261,8 +281,8 @@ function renderNotesPage() {
             <h3>${code}</h3>
             <p style="color: var(--text-muted); font-size:0.85rem; margin: 0.2rem 0 1rem;">${academicDatabase[code].name}</p>
             <div class="btn-container">
-                <a href="recourses/notes/${fileName}" target="_blank" class="btn-action" style="background:#059669">${eyeIcon} Read Notes</a>
-                <a href="recourses/notes/${fileName}" download class="btn-action btn-secondary">${downloadIcon} PDF</a>
+                <a href="${viewUrl}" target="_blank" class="btn-action" style="background:#059669">${eyeIcon} Read Notes</a>
+                <a href="${downloadUrl}" download class="btn-action btn-secondary">${downloadIcon} PDF</a>
             </div>
         `;
         container.appendChild(card);
@@ -297,7 +317,7 @@ function renderSlidesSubjectLanding() {
 }
 
 function renderSlideTopicsList(subCode) {
-    const targetFolder = academicDatabase[subCode].folder;
+    const tag = academicDatabase[subCode].tag;
     document.getElementById('slides-title').innerText = `${subCode} Slides`;
     
     const container = document.getElementById('slides-container');
@@ -316,7 +336,9 @@ function renderSlideTopicsList(subCode) {
         box.innerHTML = `<h3 style="margin-bottom:0.75rem; border-bottom:1px solid var(--border); padding-bottom:0.4rem; font-size:1rem;">${unit.title}</h3>`;
 
         unit.topics.forEach(topic => {
-            const realPath = `recourses/slides/${targetFolder}/${topic.code}.pdf`;
+            const fileName = `${topic.code}.pdf`;
+            const viewUrl = getGithubPdfViewerUrl(tag, fileName);
+            const downloadUrl = getGithubPdfDownloadUrl(tag, fileName);
 
             const row = document.createElement('div');
             row.className = 'tracker-item';
@@ -324,8 +346,8 @@ function renderSlideTopicsList(subCode) {
             row.innerHTML = `
                 <span style="font-size:0.85rem;"><strong>File: ${topic.code}.pdf</strong><br><span style="color:var(--text-muted);">${topic.name}</span></span>
                 <div class="btn-container" style="flex:none; width:auto; margin-top:0;">
-                    <a href="${realPath}" target="_blank" class="btn-action" style="padding:0.4rem 0.6rem; font-size:0.75rem; background:#9333ea">${eyeIcon} View</a>
-                    <a href="${realPath}" download class="btn-action btn-secondary" style="padding:0.4rem 0.6rem; font-size:0.75rem;">${downloadIcon} Download</a>
+                    <a href="${viewUrl}" target="_blank" class="btn-action" style="padding:0.4rem 0.6rem; font-size:0.75rem; background:#9333ea">${eyeIcon} View</a>
+                    <a href="${downloadUrl}" download class="btn-action btn-secondary" style="padding:0.4rem 0.6rem; font-size:0.75rem;">${downloadIcon} Download</a>
                 </div>
             `;
             box.appendChild(row);
@@ -342,15 +364,11 @@ function downloadSectionZip(type) {
 
     if (type === 'syllabus') {
         Object.keys(academicDatabase).forEach(code => {
-            const repoPrefix = academicDatabase[code].repoName;
-            let fileName = `${repoPrefix}_Syllabus.pdf`;
-            if (code === "MJC-7-Eng") fileName = "MJC-7-Eng_Syllabys.pdf";
-            folder.file(fileName, `Syllabus Content for ${code}`);
+            folder.file(`${code}_Syllabus.pdf`, `Syllabus Content for ${code}`);
         });
     } else if (type === 'notes') {
         Object.keys(academicDatabase).forEach(code => {
-            const repoPrefix = academicDatabase[code].repoName;
-            folder.file(`${repoPrefix}_Notes.pdf`, `Notes Content for ${code}`);
+            folder.file(`${code}_Notes.pdf`, `Notes Content for ${code}`);
         });
     } else if (type === 'slides') {
         Object.keys(academicDatabase).forEach(code => {
@@ -366,17 +384,90 @@ function downloadSectionZip(type) {
     zip.generateAsync({ type: "blob" }).then(function (content) {
         const link = document.createElement('a');
         link.href = URL.createObjectURL(content);
-        link.download = `Ani_${type.toUpperCase()}_Package.zip`;
+        link.download = `StudySpace_${type.toUpperCase()}_Package.zip`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
     });
 }
 
-// Global Initialization
+// --- 6. PWA INSTALLATION ENGINE ---
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('pwa-install-sidebar-item')?.classList.remove('hidden');
+    document.getElementById('pwa-install-mobile')?.classList.remove('hidden');
+});
+
+function installPWA() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                document.getElementById('pwa-install-sidebar-item')?.classList.add('hidden');
+                document.getElementById('pwa-install-mobile')?.classList.add('hidden');
+            }
+            deferredPrompt = null;
+        });
+    }
+}
+
+let deferredPrompt; // Browser ke native install prompt ko hold rakhne ke liye
+
+// 1. Browser ke default automatic banner ko hold karna
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Default browser banner ko roko
+    e.preventDefault();
+    // Event ko variable me save kar lo
+    deferredPrompt = e;
+    
+    // Install button ko screen par visible kar do
+    const installBtn = document.getElementById('pwa-install-btn');
+    if (installBtn) {
+        installBtn.classList.remove('hidden');
+    }
+});
+
+// 2. Button Click par Chrome ka Official Install Popup Trigger Karna
+function triggerPWAInstall() {
+    if (!deferredPrompt) {
+        alert("App installation is not available or already installed.");
+        return;
+    }
+
+    // Official Chrome Native Prompt dikhao
+    deferredPrompt.prompt();
+
+    // User ka choice check karo (Installed or Cancelled)
+    deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the PWA install prompt');
+            // Install hone ke baad button wapas hide kar do
+            document.getElementById('pwa-install-btn')?.classList.add('hidden');
+        } else {
+            console.log('User dismissed the PWA install prompt');
+        }
+        deferredPrompt = null;
+    });
+}
+
+// 3. Agar app pehle se installed hai (Standalone Mode), toh button hide rakho
+window.addEventListener('appinstalled', () => {
+    console.log('PWA was successfully installed');
+    document.getElementById('pwa-install-btn')?.classList.add('hidden');
+    deferredPrompt = null;
+});
+
+// --- INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     applyTheme(savedTheme);
-    triggerGreetingModal();
     navigateTo('dashboard');
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker Registered!', reg))
+            .catch(err => console.error('SW Reg Failure', err));
+    }
 });
